@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fears to Fiction - Episode 1: No One's Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Creepster&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="app-root"></div>
+
+    <!-- UI Layers -->
+    <div id="main-menu" class="menu hidden">
+      <div class="menu-bg"></div>
+      <div class="menu-content">
+        <div class="titles">
+          <div class="game-title">FEARS TO FICTION</div>
+          <div class="episode-title">Episode 1: No One's Home</div>
+        </div>
+        <div class="menu-buttons">
+          <button id="btn-start" class="btn primary">START EPISODE</button>
+          <button id="btn-settings" class="btn">SETTINGS</button>
+          <button id="btn-credits" class="btn">CREDITS</button>
+        </div>
+        <div class="menu-warning">⚠️ Contains psychological horror elements. Headphones recommended.</div>
+      </div>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Settings</div>
+          <button id="settings-close" class="icon-btn">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="settings-section">
+            <div class="section-title">Graphics</div>
+            <div class="setting-row">
+              <label>Quality</label>
+              <select id="graphics-quality">
+                <option>Low</option>
+                <option>Medium</option>
+                <option selected>High</option>
+                <option>Ultra</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <label>Shadow Quality</label>
+              <select id="shadow-quality">
+                <option>Off</option>
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <label>Post-Processing</label>
+              <label class="switch">
+                <input id="postfx-toggle" type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="section-title">Audio</div>
+            <div class="setting-row"><label>Master Volume</label><input id="vol-master" type="range" min="0" max="1" step="0.01" value="0.8" /></div>
+            <div class="setting-row"><label>Music Volume</label><input id="vol-music" type="range" min="0" max="1" step="0.01" value="0.5" /></div>
+            <div class="setting-row"><label>Ambient Volume</label><input id="vol-ambient" type="range" min="0" max="1" step="0.01" value="0.7" /></div>
+            <div class="setting-row"><label>SFX Volume</label><input id="vol-sfx" type="range" min="0" max="1" step="0.01" value="0.8" /></div>
+          </div>
+
+          <div class="settings-section">
+            <div class="section-title">Controls</div>
+            <div class="setting-row"><label>Mouse Sensitivity</label><input id="mouse-sens" type="range" min="0.1" max="2" step="0.01" value="1" /></div>
+            <div class="setting-row">
+              <label>Invert Y-Axis</label>
+              <label class="switch">
+                <input id="invert-y" type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="keybindings">
+              <div>WASD: Move</div>
+              <div>Shift: Sprint</div>
+              <div>E: Interact</div>
+              <div>P: Phone</div>
+              <div>ESC: Pause</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="settings-apply" class="btn primary">APPLY</button>
+          <button id="settings-cancel" class="btn">CANCEL</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="hud" class="hud hidden">
+      <div id="objective" class="objective"></div>
+      <div id="interaction" class="interaction hidden"></div>
+    </div>
+
+    <div id="phone-overlay" class="phone hidden">
+      <div class="phone-modal">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">Mom ❤️</div>
+          <div id="phone-messages" class="phone-messages"></div>
+          <button id="phone-close" class="icon-btn phone-close">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="credits" class="credits hidden">
+      <div class="credits-content">
+        <div class="credits-title">FEARS TO FICTION</div>
+        <div class="credits-sub">Episode 1: No One's Home</div>
+        <div class="credits-roll">
+          <p>Design & Code: AI Assistant</p>
+          <p>Audio: Procedural & Licensed placeholders</p>
+          <p>Story: As documented</p>
+          <p>Thanks for playing</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+  </html>
+
