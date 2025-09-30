@@ -2,6 +2,8 @@
  * StoryManager - Manages narrative progression and scripted events
  */
 
+import * as THREE from 'three';
+
 export class StoryManager {
     constructor(gameManager) {
         this.gameManager = gameManager;

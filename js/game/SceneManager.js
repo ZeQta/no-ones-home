@@ -2,8 +2,12 @@
  * SceneManager - Three.js scene setup and rendering
  */
 
+import * as THREE from 'three';
 import { ShadowFigure } from '../entities/ShadowFigure.js';
 import { InteractableObject } from '../entities/InteractableObject.js';
+
+// Make THREE globally available for compatibility
+window.THREE = THREE;
 
 export class SceneManager {
     constructor() {

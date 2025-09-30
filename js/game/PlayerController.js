@@ -2,6 +2,9 @@
  * PlayerController - First-person movement and interaction
  */
 
+import * as THREE from 'three';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+
 export class PlayerController {
     constructor(camera, scene, domElement) {
         this.camera = camera;
@@ -48,7 +51,7 @@ export class PlayerController {
 
     async init() {
         // Create pointer lock controls
-        this.controls = new THREE.PointerLockControls(this.camera, this.domElement);
+        this.controls = new PointerLockControls(this.camera, this.domElement);
         this.scene.add(this.controls.getObject());
         
         // Set up event listeners

@@ -5,6 +5,10 @@
 
 echo "🎮 Fears to Fiction - Starting Local Server..."
 echo ""
+echo "📝 IMPORTANT: After starting, test these URLs:"
+echo "   • http://localhost:8000/test.html (Minimal working version)"
+echo "   • http://localhost:8000/index.html (Full game)"
+echo ""
 
 # Try Python 3
 if command -v python3 &> /dev/null; then

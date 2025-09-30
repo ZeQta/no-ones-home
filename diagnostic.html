@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fears to Fiction - Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test { 
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 3px solid #333;
+        }
+        .pass { border-color: #00ff00; color: #00ff00; }
+        .fail { border-color: #ff0000; color: #ff0000; }
+        .warn { border-color: #ffaa00; color: #ffaa00; }
+        h1 { color: #ff4444; }
+        button {
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        button:hover { background: #00ff00; color: #0a0a0a; }
+        #console {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Fears to Fiction - Diagnostic Tool</h1>
+    <p>This tool checks if your browser and setup can run the game.</p>
+
+    <div id="results"></div>
+
+    <button onclick="runTests()">Run All Tests</button>
+    <button onclick="testThreeJS()">Test Three.js</button>
+    <button onclick="testPointerLock()">Test Pointer Lock</button>
+    <button onclick="location.reload()">Refresh</button>
+
+    <div id="console"></div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        const results = document.getElementById('results');
+        const consoleDiv = document.getElementById('console');
+
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            div.style.color = type === 'error' ? '#ff0000' : type === 'warn' ? '#ffaa00' : '#00ff00';
+            consoleDiv.appendChild(div);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(msg);
+        }
+
+        function addTest(name, passed, details = '') {
+            const div = document.createElement('div');
+            div.className = `test ${passed ? 'pass' : 'fail'}`;
+            div.innerHTML = `
+                <strong>${passed ? '✅' : '❌'} ${name}</strong>
+                ${details ? '<br>' + details : ''}
+            `;
+            results.appendChild(div);
+            log(`${name}: ${passed ? 'PASS' : 'FAIL'} ${details}`, passed ? 'info' : 'error');
+        }
+
+        window.runTests = async function() {
+            results.innerHTML = '<h2>Running Tests...</h2>';
+            consoleDiv.innerHTML = '';
+            log('Starting diagnostic tests...');
+
+            // Test 1: Import Maps Support
+            const supportsImportMaps = HTMLScriptElement.supports && HTMLScriptElement.supports('importmap');
+            addTest('Import Maps Support', supportsImportMaps, 
+                supportsImportMaps ? 'Browser supports import maps' : 'Try Chrome/Edge');
+
+            // Test 2: ES6 Modules
+            const supportsModules = 'noModule' in document.createElement('script');
+            addTest('ES6 Module Support', supportsModules);
+
+            // Test 3: WebGL
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+            addTest('WebGL Support', !!gl, gl ? 'WebGL version: ' + gl.getParameter(gl.VERSION) : '');
+
+            // Test 4: Pointer Lock API
+            const supportsPointerLock = 'pointerLockElement' in document || 
+                                       'mozPointerLockElement' in document || 
+                                       'webkitPointerLockElement' in document;
+            addTest('Pointer Lock API', supportsPointerLock);
+
+            // Test 5: Local Storage
+            let hasLocalStorage = false;
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                hasLocalStorage = true;
+            } catch (e) {}
+            addTest('Local Storage', hasLocalStorage);
+
+            // Test 6: Three.js Import
+            try {
+                const THREE = await import('three');
+                addTest('Three.js Import', true, 'Version: r' + THREE.REVISION);
+            } catch (e) {
+                addTest('Three.js Import', false, 'Error: ' + e.message);
+            }
+
+            // Test 7: Network Access
+            try {
+                const response = await fetch(window.location.href);
+                const isLocal = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1';
+                addTest('Network Access', response.ok, 
+                    isLocal ? 'Running on localhost ✓' : 'Warning: Not localhost');
+            } catch (e) {
+                addTest('Network Access', false, 'Error: ' + e.message);
+            }
+
+            // Test 8: Performance
+            const perfSupported = typeof performance !== 'undefined' && performance.now;
+            addTest('Performance API', perfSupported);
+
+            // Summary
+            const div = document.createElement('div');
+            div.className = 'test pass';
+            div.innerHTML = '<strong>✅ Tests Complete!</strong><br>Check results above.';
+            results.appendChild(div);
+            log('All tests completed');
+        };
+
+        window.testThreeJS = async function() {
+            log('Testing Three.js...');
+            try {
+                const THREE = await import('three');
+                log('THREE.js loaded successfully!', 'info');
+                log('Version: r' + THREE.REVISION, 'info');
+                
+                const scene = new THREE.Scene();
+                log('Scene created', 'info');
+                
+                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+                log('Camera created', 'info');
+                
+                const geometry = new THREE.BoxGeometry(1, 1, 1);
+                log('Geometry created', 'info');
+                
+                const material = new THREE.MeshBasicMaterial({ color: 0xff4444 });
+                log('Material created', 'info');
+                
+                const cube = new THREE.Mesh(geometry, material);
+                log('Mesh created', 'info');
+                
+                scene.add(cube);
+                log('✅ Three.js is fully functional!', 'info');
+                
+                alert('✅ Three.js test passed! Check console for details.');
+            } catch (e) {
+                log('❌ Three.js test failed: ' + e.message, 'error');
+                alert('❌ Three.js test failed. Check console.');
+            }
+        };
+
+        window.testPointerLock = function() {
+            log('Testing Pointer Lock...');
+            const el = document.body;
+            
+            document.addEventListener('pointerlockchange', () => {
+                if (document.pointerLockElement) {
+                    log('✅ Pointer locked successfully!', 'info');
+                    alert('✅ Pointer Lock works! Press ESC to unlock.');
+                    document.exitPointerLock();
+                }
+            });
+
+            try {
+                el.requestPointerLock();
+                log('Pointer lock requested...', 'info');
+            } catch (e) {
+                log('❌ Pointer Lock failed: ' + e.message, 'error');
+                alert('❌ Pointer Lock not supported or failed');
+            }
+        };
+
+        // Auto-run on load
+        setTimeout(() => {
+            log('Page loaded. Ready for tests.');
+            log('Click "Run All Tests" to begin.');
+        }, 500);
+    </script>
+</body>
+</html>

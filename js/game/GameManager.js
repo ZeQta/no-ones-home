@@ -155,8 +155,8 @@ export class GameManager {
         }
         
         // Update TWEEN animations
-        if (window.TWEEN) {
-            window.TWEEN.update();
+        if (typeof TWEEN !== 'undefined') {
+            TWEEN.update();
         }
     }
 

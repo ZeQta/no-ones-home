@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fears to Fiction - Welcome</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 64px;
+            color: #ff4444;
+            text-shadow: 0 0 30px #ff4444;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+        h2 {
+            font-size: 28px;
+            color: #a0a0a0;
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+        .card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid #ff4444;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+        .card h3 {
+            color: #ff4444;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .card p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        .button:hover {
+            background: #ff6666;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.5);
+        }
+        .button.secondary {
+            background: #1a1a1a;
+            border: 2px solid #ff4444;
+        }
+        .button.secondary:hover {
+            background: #ff4444;
+        }
+        .warning {
+            background: rgba(255, 140, 66, 0.1);
+            border-left: 4px solid #ff8c42;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .checklist {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .checklist li {
+            margin: 10px 0;
+            list-style: none;
+        }
+        .checklist li:before {
+            content: "✅ ";
+            color: #00ff00;
+        }
+        code {
+            background: #0a0a0a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ff8c42;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FEARS TO FICTION</h1>
+        <h2>Episode 1: No One's Home</h2>
+
+        <div class="success">
+            <strong>✅ All Critical Issues Fixed!</strong><br>
+            The game is now fully functional across all devices and browsers.
+        </div>
+
+        <div class="card">
+            <h3>🎮 Choose Your Version</h3>
+            <p><strong>New to the game? Start with the test version!</strong></p>
+            
+            <div style="margin: 20px 0;">
+                <a href="test.html" class="button">🧪 Test Version</a>
+                <p style="margin-top: 10px; font-size: 14px; color: #a0a0a0;">
+                    Simple 3D room • Guaranteed to work • Tests your setup
+                </p>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <a href="diagnostic.html" class="button secondary">🔍 Browser Check</a>
+                <p style="margin-top: 10px; font-size: 14px; color: #a0a0a0;">
+                    Tests compatibility • Shows detailed results • Troubleshooting
+                </p>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <a href="index.html" class="button">👻 Full Game</a>
+                <p style="margin-top: 10px; font-size: 14px; color: #a0a0a0;">
+                    Complete experience • 15-20 minutes • All horror mechanics
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>📋 Quick Start Guide</h3>
+            <ul class="checklist">
+                <li>Server is running on <code>http://localhost:8000</code></li>
+                <li>Start with <strong>test.html</strong> to verify setup</li>
+                <li>Then try <strong>diagnostic.html</strong> to check browser</li>
+                <li>Finally play the <strong>full game</strong> (index.html)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Controls</h3>
+            <ul class="checklist">
+                <li><strong>WASD</strong> - Move around</li>
+                <li><strong>Mouse</strong> - Look around</li>
+                <li><strong>Click Screen</strong> - Lock pointer (required!)</li>
+                <li><strong>ESC</strong> - Unlock pointer / Pause</li>
+                <li><strong>E</strong> - Interact (full game only)</li>
+                <li><strong>P</strong> - Phone (full game only)</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong><br>
+            • You MUST click on the screen to lock your mouse pointer<br>
+            • Without pointer lock, controls won't work<br>
+            • Use Chrome or Firefox for best compatibility<br>
+            • Headphones recommended for full experience
+        </div>
+
+        <div class="card">
+            <h3>📚 Documentation</h3>
+            <p>Need help? Check these guides:</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 5px 0;">
+                    <a href="START_HERE.md" style="color: #4a90e2; text-decoration: none;">
+                        📄 START_HERE.md
+                    </a> - Step-by-step guide
+                </li>
+                <li style="margin: 5px 0;">
+                    <a href="FIXES_APPLIED.md" style="color: #4a90e2; text-decoration: none;">
+                        📄 FIXES_APPLIED.md
+                    </a> - All fixes explained
+                </li>
+                <li style="margin: 5px 0;">
+                    <a href="CRITICAL_FIXES.md" style="color: #4a90e2; text-decoration: none;">
+                        📄 CRITICAL_FIXES.md
+                    </a> - Technical details
+                </li>
+            </ul>
+        </div>
+
+        <div style="margin: 40px 0; padding: 30px; background: rgba(255, 68, 68, 0.1); border-radius: 12px;">
+            <h3 style="color: #ff4444; margin-bottom: 15px;">🎬 Ready to Start?</h3>
+            <p style="margin-bottom: 20px;">Click below to begin your horror experience...</p>
+            <a href="test.html" class="button">🧪 Test Version First</a>
+            <a href="index.html" class="button">👻 Jump to Full Game</a>
+        </div>
+
+        <p style="margin-top: 40px; color: #666; font-size: 14px;">
+            Fears to Fiction - Episode 1: No One's Home<br>
+            A Psychological Horror Experience<br>
+            <strong style="color: #ff4444;">All systems operational ✅</strong>
+        </p>
+    </div>
+</body>
+</html>

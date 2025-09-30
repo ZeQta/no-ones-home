@@ -2,6 +2,8 @@
  * ShadowFigure - The antagonist entity
  */
 
+import * as THREE from 'three';
+
 export class ShadowFigure {
     constructor(scene) {
         this.scene = scene;
@@ -84,7 +86,7 @@ export class ShadowFigure {
         this.targetPosition.copy(targetPosition);
         
         // Use TWEEN for smooth movement
-        if (window.TWEEN) {
+        if (typeof TWEEN !== 'undefined') {
             const start = { 
                 x: this.mesh.position.x, 
                 z: this.mesh.position.z 
@@ -94,9 +96,9 @@ export class ShadowFigure {
                 z: targetPosition.z 
             };
             
-            new window.TWEEN.Tween(start)
+            new TWEEN.Tween(start)
                 .to(end, duration * 1000)
-                .easing(window.TWEEN.Easing.Linear.None)
+                .easing(TWEEN.Easing.Linear.None)
                 .onUpdate(() => {
                     this.mesh.position.x = start.x;
                     this.mesh.position.z = start.z;
@@ -113,11 +115,11 @@ export class ShadowFigure {
         this.show();
         this.mesh.material.opacity = 0;
         
-        if (window.TWEEN) {
+        if (typeof TWEEN !== 'undefined') {
             const opacity = { value: 0 };
-            new window.TWEEN.Tween(opacity)
+            new TWEEN.Tween(opacity)
                 .to({ value: 1 }, duration * 1000)
-                .easing(window.TWEEN.Easing.Quadratic.In)
+                .easing(TWEEN.Easing.Quadratic.In)
                 .onUpdate(() => {
                     this.mesh.material.opacity = opacity.value;
                 })
@@ -128,11 +130,11 @@ export class ShadowFigure {
     }
 
     fadeOut(duration = 1.0) {
-        if (window.TWEEN) {
+        if (typeof TWEEN !== 'undefined') {
             const opacity = { value: this.mesh.material.opacity };
-            new window.TWEEN.Tween(opacity)
+            new TWEEN.Tween(opacity)
                 .to({ value: 0 }, duration * 1000)
-                .easing(window.TWEEN.Easing.Quadratic.Out)
+                .easing(TWEEN.Easing.Quadratic.Out)
                 .onUpdate(() => {
                     this.mesh.material.opacity = opacity.value;
                 })
