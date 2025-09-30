@@ -1,1 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fears to Fiction - Episode 1: No One's Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Creepster&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Menu -->
+    <div id="main-menu" class="menu-container">
+        <div class="menu-background"></div>
+        <div class="menu-content">
+            <h1 class="game-title">FEARS TO FICTION</h1>
+            <h2 class="episode-title">Episode 1: No One's Home</h2>
+            <div class="menu-buttons">
+                <button id="start-btn" class="menu-button primary">START EPISODE</button>
+                <button id="settings-btn" class="menu-button">SETTINGS</button>
+                <button id="credits-btn" class="menu-button">CREDITS</button>
+            </div>
+            <p class="warning-text">⚠️ Contains psychological horror elements. Headphones recommended.</p>
+        </div>
+    </div>
 
+    <!-- Settings Menu -->
+    <div id="settings-menu" class="modal-overlay hidden">
+        <div class="modal-content settings-panel">
+            <h2 class="modal-title">SETTINGS</h2>
+            
+            <div class="settings-section">
+                <h3>Graphics</h3>
+                <div class="setting-item">
+                    <label>Quality</label>
+                    <select id="quality-select">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high" selected>High</option>
+                        <option value="ultra">Ultra</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Shadow Quality</label>
+                    <select id="shadow-select">
+                        <option value="off">Off</option>
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Post-Processing</label>
+                    <input type="checkbox" id="postfx-toggle" checked>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Audio</h3>
+                <div class="setting-item">
+                    <label>Master Volume</label>
+                    <input type="range" id="master-volume" min="0" max="100" value="80">
+                    <span id="master-value">80%</span>
+                </div>
+                <div class="setting-item">
+                    <label>Music Volume</label>
+                    <input type="range" id="music-volume" min="0" max="100" value="70">
+                    <span id="music-value">70%</span>
+                </div>
+                <div class="setting-item">
+                    <label>SFX Volume</label>
+                    <input type="range" id="sfx-volume" min="0" max="100" value="85">
+                    <span id="sfx-value">85%</span>
+                </div>
+                <div class="setting-item">
+                    <label>Ambient Volume</label>
+                    <input type="range" id="ambient-volume" min="0" max="100" value="75">
+                    <span id="ambient-value">75%</span>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Controls</h3>
+                <div class="setting-item">
+                    <label>Mouse Sensitivity</label>
+                    <input type="range" id="mouse-sens" min="0.1" max="2.0" step="0.1" value="1.0">
+                    <span id="sens-value">1.0</span>
+                </div>
+                <div class="setting-item">
+                    <label>Invert Y-Axis</label>
+                    <input type="checkbox" id="invert-y">
+                </div>
+                <div class="keybinds">
+                    <p><strong>WASD</strong> - Movement</p>
+                    <p><strong>E</strong> - Interact</p>
+                    <p><strong>Shift</strong> - Sprint</p>
+                    <p><strong>ESC</strong> - Pause</p>
+                    <p><strong>P</strong> - Phone</p>
+                </div>
+            </div>
+
+            <button id="settings-close" class="menu-button">BACK</button>
+        </div>
+    </div>
+
+    <!-- Credits Menu -->
+    <div id="credits-menu" class="modal-overlay hidden">
+        <div class="modal-content credits-panel">
+            <h2 class="modal-title">CREDITS</h2>
+            <div class="credits-content">
+                <p><strong>FEARS TO FICTION</strong></p>
+                <p>Episode 1: No One's Home</p>
+                <br>
+                <p><strong>Developed by:</strong> AI Agent</p>
+                <p><strong>Engine:</strong> Three.js</p>
+                <p><strong>Genre:</strong> Psychological Horror</p>
+                <br>
+                <p><strong>Inspired by:</strong> Fears to Fathom Series</p>
+                <br>
+                <p>Thank you for playing.</p>
+            </div>
+            <button id="credits-close" class="menu-button">BACK</button>
+        </div>
+    </div>
+
+    <!-- Phone UI -->
+    <div id="phone-ui" class="phone-overlay hidden">
+        <div class="phone-device">
+            <div class="phone-screen">
+                <div class="phone-header">
+                    <span class="phone-time">6:32 PM</span>
+                    <button id="phone-close" class="phone-close-btn">✕</button>
+                </div>
+                <div class="phone-contact">
+                    <div class="contact-name">Mom ❤️</div>
+                </div>
+                <div class="phone-messages" id="phone-messages">
+                    <!-- Messages will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- In-Game HUD -->
+    <div id="game-hud" class="hidden">
+        <div id="objective-hint" class="objective-hint">
+            Explore the house
+        </div>
+        <div id="interaction-prompt" class="interaction-prompt hidden">
+            [E] Interact with Object
+        </div>
+        <div id="fear-vignette" class="fear-vignette"></div>
+        <div id="tutorial-prompt" class="tutorial-prompt hidden"></div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="modal-overlay hidden">
+        <div class="modal-content pause-panel">
+            <h2 class="modal-title">PAUSED</h2>
+            <div class="menu-buttons">
+                <button id="resume-btn" class="menu-button primary">RESUME</button>
+                <button id="pause-settings-btn" class="menu-button">SETTINGS</button>
+                <button id="quit-btn" class="menu-button">QUIT TO MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Credits -->
+    <div id="end-credits" class="credits-overlay hidden">
+        <div class="end-credits-content">
+            <h1 class="end-title">FEARS TO FICTION</h1>
+            <h2 class="end-subtitle">Episode 1: No One's Home</h2>
+            <h3 class="end-text">END</h3>
+            <div class="end-credits-scroll">
+                <p><strong>Thank you for playing</strong></p>
+                <br><br>
+                <p>No One's Home</p>
+                <p>A Psychological Horror Experience</p>
+                <br><br>
+                <p><strong>Development</strong></p>
+                <p>AI Agent</p>
+                <br><br>
+                <p><strong>Powered by</strong></p>
+                <p>Three.js</p>
+                <br><br>
+                <p>The loop continues...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <h2>LOADING</h2>
+            <div class="loading-bar">
+                <div id="loading-progress" class="loading-progress"></div>
+            </div>
+            <p id="loading-text">Initializing...</p>
+        </div>
+    </div>
+
+    <!-- Canvas Container -->
+    <div id="game-container"></div>
+
+    <!-- Three.js and Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/PointerLockControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/20.0.0/tween.umd.js"></script>
+
+    <!-- Game Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

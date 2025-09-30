@@ -1,0 +1,31 @@
+{
+  "name": "fears-to-fiction-episode-1",
+  "version": "1.0.0",
+  "description": "A psychological horror game built with Three.js - Episode 1: No One's Home",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000 || python3 -m http.server 8000 || npx http-server -p 8000",
+    "dev": "npx http-server -p 8000 -c-1",
+    "serve": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "horror",
+    "game",
+    "threejs",
+    "psychological-horror",
+    "web-game",
+    "first-person"
+  ],
+  "author": "AI Agent",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/fears-to-fiction"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
